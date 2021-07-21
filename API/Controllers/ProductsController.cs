@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.Products;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -7,11 +9,9 @@ namespace API.Controllers
     public class ProductsController : BaseApiController
     {
 		[HttpGet]
-		public async Task<List<string>> GetProducts()
+		public async Task<List<Product>> GetProducts()
 		{
-
-			return await Task.Run(() => { return new List<string>() { "p", "p1" }; });
-			// return HandleResult(await Mediator.Send(new List.Query()));
+			return await Mediator.Send(new List.Query());
 		}
 	}
 }
