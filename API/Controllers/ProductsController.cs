@@ -13,5 +13,10 @@ namespace API.Controllers
 		{
 			return await Mediator.Send(new List.Query());
 		}
+		[HttpGet("{id}")]
+		public async Task<Product> GetProduct(int id)
+		{
+			return await Mediator.Send(new Details.Query { Id = id });
+		}
 	}
 }
