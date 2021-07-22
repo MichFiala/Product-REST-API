@@ -1,12 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Domain;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Persistence
 {
-    public class DataContext : DbContext
-    {
+	public class DataContext : DbContext
+	{
 		public DataContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<Product> Products { get; set; }
+		public virtual DbSet<Product> Products { get; set; }
 	}
 }

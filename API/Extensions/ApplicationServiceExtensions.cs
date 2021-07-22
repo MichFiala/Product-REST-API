@@ -23,7 +23,6 @@ namespace API.Extensions
 				opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
 			});
 
-			services.AddMediatR(typeof(List.Handler).Assembly);
 			// Adding versioning
 			services.AddApiVersioning(cfg => {
 				cfg.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);

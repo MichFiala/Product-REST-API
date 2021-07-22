@@ -8,27 +8,14 @@ using Persistence;
 
 namespace Application.Products
 {
-    public class Details
-    {
-        public class Query : IRequest<Result<Product>>
+	public class Details
+	{
+		public async Task<Result<Product>> Get(int Id, DataContext DataContext)
 		{
-			public int Id { get; set; }
+			var product = await DataContext.Products.FirstOrDefaultAsync(x => x.Id == Id);
+
+			return Result<Product>.Success(product);
 		}
 
-        public class Handler : IRequestHandler<Query, Result<Product>>
-		{
-			private readonly DataContext _context;
-			public Handler(DataContext context)
-			{
-				_context = context;
-			}
-
-			public async Task<Result<Product>> Handle(Query request, CancellationToken cancellationToken)
-			{
-				var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == request.Id);
-
-				return Result<Product>.Success(product);
-			}
-		}
-    }
+	}
 }

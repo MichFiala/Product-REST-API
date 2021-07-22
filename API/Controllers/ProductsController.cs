@@ -3,26 +3,33 @@ using System.Threading.Tasks;
 using Application.Products;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Persistence;
 
 namespace API.Controllers
 {
 	public class ProductsController : BaseApiController
 	{
+		private readonly DataContext _dataContext;
+
+		public ProductsController(DataContext dataContext)
+		{
+			_dataContext = dataContext;
+		}
 		[HttpGet]
 		public async Task<IActionResult> GetProducts()
 		{
-			return HandleResult(await Mediator.Send(new List.Query()));
+			return HandleResult(await new List().Get(_dataContext));
 		}
 		[HttpGet("{page}/{take?}")]
 		[MapToApiVersion("2.0")]
 		public async Task<IActionResult> GetProducts(int page, int? take = 10)
 		{
-			return HandleResult(await Mediator.Send(new List.Query{ Step = page, Take = take}));
+			return HandleResult(await new List().Get(_dataContext, page, take));
 		}
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetProduct(int id)
 		{
-			return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
+			return HandleResult(await new Details().Get(id, _dataContext));
 		}
 		[HttpPut("{id}")]
 		public async Task<IActionResult> EditProduct(int id, string description)
@@ -33,7 +40,7 @@ namespace API.Controllers
 				Description = description
 			};
 
-			return HandleResult(await Mediator.Send(new Edit.Command { Product = product }));
+			return HandleResult(await new Edit().Handle(product, _dataContext));
 		}
 	}
 }
