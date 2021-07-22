@@ -1,5 +1,4 @@
 using Application.Products;
-using MediatR;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
