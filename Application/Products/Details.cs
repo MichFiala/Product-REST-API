@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Core;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -9,12 +10,12 @@ namespace Application.Products
 {
     public class Details
     {
-        public class Query : IRequest<Product>
+        public class Query : IRequest<Result<Product>>
 		{
 			public int Id { get; set; }
 		}
 
-        public class Handler : IRequestHandler<Query, Product>
+        public class Handler : IRequestHandler<Query, Result<Product>>
 		{
 			private readonly DataContext _context;
 			public Handler(DataContext context)
@@ -22,11 +23,11 @@ namespace Application.Products
 				_context = context;
 			}
 
-			public async Task<Product> Handle(Query request, CancellationToken cancellationToken)
+			public async Task<Result<Product>> Handle(Query request, CancellationToken cancellationToken)
 			{
 				var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == request.Id);
 
-				return product;
+				return Result<Product>.Success(product);
 			}
 		}
     }

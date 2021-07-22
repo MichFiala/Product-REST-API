@@ -9,27 +9,25 @@ namespace API.Controllers
 	public class ProductsController : BaseApiController
 	{
 		[HttpGet]
-		public async Task<List<Product>> GetProducts()
+		public async Task<IActionResult> GetProducts()
 		{
-			return await Mediator.Send(new List.Query());
+			return HandleResult(await Mediator.Send(new List.Query()));
 		}
 		[HttpGet("{id}")]
-		public async Task<Product> GetProduct(int id)
+		public async Task<IActionResult> GetProduct(int id)
 		{
-			return await Mediator.Send(new Details.Query { Id = id });
+			return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
 		}
 		[HttpPut("{id}")]
-		public async Task<IActionResult> EditProduct(int id, string productDescription)
+		public async Task<IActionResult> EditProduct(int id, string description)
 		{
 			Product product = new Product
 			{
 				Id = id,
-				Description = productDescription
+				Description = description
 			};
 
-			await Mediator.Send(new Edit.Command { Product = product });
-
-			return Ok();
+			return HandleResult(await Mediator.Send(new Edit.Command { Product = product }));
 		}
 	}
 }

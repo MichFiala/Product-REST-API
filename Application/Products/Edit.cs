@@ -1,19 +1,20 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Core;
 using Domain;
 using MediatR;
 using Persistence;
 
 namespace Application.Products
 {
-    public class Edit
-    {
-        public class Command : IRequest<Unit>
+	public class Edit
+	{
+		public class Command : IRequest<Result<Unit>>
 		{
 			public Product Product { get; set; }
 		}
 
-        public class Handler : IRequestHandler<Command, Unit>
+		public class Handler : IRequestHandler<Command, Result<Unit>>
 		{
 			private readonly DataContext _context;
 
@@ -22,18 +23,18 @@ namespace Application.Products
 				_context = context;
 			}
 
-			public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+			public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
 			{
 				var product = await _context.Products.FindAsync(request.Product.Id);
 
-				if(product == null) return Unit.Value;
-                // Updating only description
+				if (product == null) return null;
+				// Updating only description
 				product.Description = request.Product.Description;
 
 				var result = await _context.SaveChangesAsync() > 0;
 
-				return Unit.Value;
+				return result ? Result<Unit>.Success(Unit.Value) : Result<Unit>.Failure("Failed to update product");
 			}
 		}
-    }
+	}
 }
