@@ -10,8 +10,10 @@ For running application cd into API and run -> dotnet watch run
 
 For running tests cd into Test and run -> dotnet test
 
-Note: This project was done in hurry with not catching all errors of application
+Note: 
 
-      It is missing swagger documentation due to missing experince in using swagger
+This project was done in hurry with not catching all errors of application
+
+It is missing swagger documentation due to missing experince in using swagger
       
       
