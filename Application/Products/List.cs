@@ -12,7 +12,12 @@ namespace Application.Products
 {
     public class List
     {
-		public class Query : IRequest<Result<List<Product>>> { }
+		public class Query : IRequest<Result<List<Product>>> 
+		{ 
+			public int? Take { get; set; }
+
+			public int? Step { get; set; }
+		}
 
         public class Handler : IRequestHandler<Query, Result<List<Product>>>
 		{
@@ -24,7 +29,19 @@ namespace Application.Products
 
 			public async Task<Result<List<Product>>> Handle(Query request, CancellationToken cancellationToken)
 			{
-				var products = await _context.Products.ToListAsync();
+				List<Product> products = null;
+
+				if(request.Step != null && request.Take != null)
+				{
+					products = await _context.Products
+								.OrderBy(x => x.Price)
+								.Skip(request.Step.Value * request.Take.Value)
+								.Take(request.Take.Value).ToListAsync();
+				}
+				else
+				{
+					products = await _context.Products.ToListAsync();
+				}
 
 				return Result<List<Product>>.Success(products);
 			}

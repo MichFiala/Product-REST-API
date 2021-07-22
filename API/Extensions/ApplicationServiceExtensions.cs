@@ -1,5 +1,6 @@
 using Application.Products;
 using MediatR;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,7 @@ namespace API.Extensions
 				cfg.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
 				cfg.AssumeDefaultVersionWhenUnspecified = true;
 				cfg.ReportApiVersions = true;
+				cfg.ApiVersionReader = new HeaderApiVersionReader("api-version");
 			});
 
 			return services;

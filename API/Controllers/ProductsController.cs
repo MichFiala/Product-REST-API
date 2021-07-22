@@ -13,6 +13,12 @@ namespace API.Controllers
 		{
 			return HandleResult(await Mediator.Send(new List.Query()));
 		}
+		[HttpGet("{page}/{take?}")]
+		[MapToApiVersion("2.0")]
+		public async Task<IActionResult> GetProducts(int page, int? take = 10)
+		{
+			return HandleResult(await Mediator.Send(new List.Query{ Step = page, Take = take}));
+		}
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetProduct(int id)
 		{
