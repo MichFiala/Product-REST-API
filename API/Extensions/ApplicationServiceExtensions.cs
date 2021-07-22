@@ -12,7 +12,7 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
-            services.AddSwaggerGen(c =>
+            	services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
 			});
@@ -23,6 +23,12 @@ namespace API.Extensions
 			});
 
 			services.AddMediatR(typeof(List.Handler).Assembly);
+			// Adding versioning
+			services.AddApiVersioning(cfg => {
+				cfg.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+				cfg.AssumeDefaultVersionWhenUnspecified = true;
+				cfg.ReportApiVersions = true;
+			});
 
 			return services;
 		}         
