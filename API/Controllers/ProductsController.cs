@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.Core;
 using Application.Products;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -20,11 +21,11 @@ namespace API.Controllers
 		{
 			return HandleResult(await new List(_dataContext).Get());
 		}
-		[HttpGet("{page}/{take?}")]
+		[HttpGet("paged")]
 		[MapToApiVersion("2.0")]
-		public async Task<IActionResult> GetProducts(int page, int? take = 10)
+		public async Task<IActionResult> GetProductsPaged([FromQuery]PagingParams pagingParams)
 		{
-			return HandleResult(await new List(_dataContext).Get(page, take));
+			return HandlePagedResult(await new List(_dataContext).GetByPaging(pagingParams));
 		}
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetProduct(int id)

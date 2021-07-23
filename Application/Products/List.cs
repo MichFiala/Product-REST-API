@@ -16,21 +16,18 @@ namespace Application.Products
 		{
 			_dataContext = dataContext;
 		}
-		public async Task<Result<List<Product>>> Get(int? step = null, int? take = null)
+		public async Task<Result<PagedList<Product>>> GetByPaging(PagingParams pagingParams)
 		{
-			List<Product> products = null;
+			var products = _dataContext.Products.OrderBy(x => x.Id).AsQueryable();
 
-			if (step != null && take != null)
-			{
-				products = await _dataContext.Products
-							.OrderBy(x => x.Name)
-							.Skip(step.Value * take.Value)
-							.Take(take.Value).ToListAsync();
-			}
-			else
-			{
-				products = await _dataContext.Products.ToListAsync();
-			}
+			return Result<PagedList<Product>>.Success(
+				await PagedList<Product>.CreateAsync(products, pagingParams.PageNumber, pagingParams.PageSize)
+			);
+		}
+
+		public async Task<Result<List<Product>>> Get()
+		{
+			var products = await _dataContext.Products.ToListAsync();
 
 			return Result<List<Product>>.Success(products);
 		}

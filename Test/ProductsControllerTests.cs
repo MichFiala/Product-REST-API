@@ -47,7 +47,7 @@ namespace Test
 
 			var controller = new ProductsController(_context);
 
-			var actionResult = await controller.GetProducts(1, 2);
+			var actionResult = await controller.GetProductsPaged(new PagingParams());
 
 			var okResult = actionResult as OkObjectResult;
 
