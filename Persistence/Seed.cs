@@ -47,6 +47,90 @@ namespace Persistence
                     ImgUri = "charger.jpg",
                     Price = 580.666666m,
                     Description = null
+                },
+                new Product
+                {
+                    Name = "Laptop - 1",
+                    ImgUri = "laptop2.jpg",
+                    Price = 580.666666m,
+                    Description = null
+                },
+                new Product
+                {
+                    Name = "Mouse - 1",
+                    ImgUri = "mouse.jpg",
+                    Price = 800m,
+                    Description = null
+                },
+                new Product
+                {
+                    Name = "Laptop - 2",
+                    ImgUri = "laptop1.jpg",
+                    Price = 7000m,
+                    Description = null
+                },
+                new Product
+                {
+                    Name = "Charger - 1",
+                    ImgUri = "charger.jpg",
+                    Price = 336m,
+                    Description = null
+                },
+                new Product
+                {
+                    Name = "Laptop - 3",
+                    ImgUri = "laptop2.jpg",
+                    Price = 58000m,
+                    Description = null
+                },
+                new Product
+                {
+                    Name = "Keyboard - 1",
+                    ImgUri = "keyboard.jpg",
+                    Price = 780m,
+                    Description = null
+                },
+                                new Product
+                {
+                    Name = "Laptop - 4",
+                    ImgUri = "laptop2.jpg",
+                    Price = 580.666666m,
+                    Description = null
+                },
+                new Product
+                {
+                    Name = "Mouse - 2",
+                    ImgUri = "mouse.jpg",
+                    Price = 800m,
+                    Description = null
+                },
+                new Product
+                {
+                    Name = "Laptop - 5",
+                    ImgUri = "laptop1.jpg",
+                    Price = 7000m,
+                    Description = null
+                },
+                new Product
+                {
+                    Name = "Charger - 3",
+                    ImgUri = "charger.jpg",
+                    Price = 336m,
+                    Description = null
+                },
+                new Product
+                {
+                    Name = "Laptop - 6",
+                    ImgUri = "laptop2.jpg",
+                    Price = 58000m,
+                    Description = null
+                },
+                new Product
+                {
+                    Name = "Keyboard - 3",
+                    ImgUri = "keyboard.jpg",
+                    Price = 780m,
+                    Description = null
                 }
 			};
 
