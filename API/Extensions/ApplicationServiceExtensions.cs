@@ -22,6 +22,14 @@ namespace API.Extensions
 				opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
 			});
 
+			services.AddCors(opt =>
+			{
+				opt.AddPolicy("CorsPolicy", policy =>
+				{
+					policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
+				});
+			});
+
 			// Adding versioning
 			services.AddApiVersioning(cfg => {
 				cfg.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);

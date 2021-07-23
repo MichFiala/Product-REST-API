@@ -16,28 +16,28 @@ namespace Persistence
                 new Product
                 {
                     Name = "HP",
-                    ImgUri = "hp.png",
+                    ImgUri = "laptop1.jpg",
                     Price = 14999.9m,
                     Description = null
                 },
                 new Product
                 {
                     Name = "Dell",
-                    ImgUri = "dell.png",
+                    ImgUri = "laptop2.jpg",
                     Price = 28999.0m,
                     Description = "Dell laptop"
                 },
                 new Product
                 {
                     Name = "Keyboard",
-                    ImgUri = "kb.png",
+                    ImgUri = "keyboard.jpg",
                     Price = 1400.0m,
                     Description = null
                 },
                 new Product
                 {
                     Name = "Mouse",
-                    ImgUri = "mouse.png",
+                    ImgUri = "mouse.jpg",
                     Price = 400m,
                     Description = "Verticall mouse"
                 },
