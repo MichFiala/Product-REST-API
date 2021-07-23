@@ -9,9 +9,15 @@ namespace Application.Products
 {
 	public class Details
 	{
-		public async Task<Result<Product>> Get(int Id, DataContext DataContext)
+		private readonly DataContext _dataContext;
+
+		public Details(DataContext dataContext)
 		{
-			var product = await DataContext.Products.FirstOrDefaultAsync(x => x.Id == Id);
+			_dataContext = dataContext;
+		}
+		public async Task<Result<Product>> Get(int id)
+		{
+			var product = await _dataContext.Products.FirstOrDefaultAsync(x => x.Id == id);
 
 			return Result<Product>.Success(product);
 		}

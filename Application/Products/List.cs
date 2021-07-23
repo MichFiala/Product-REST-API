@@ -9,22 +9,27 @@ using Persistence;
 
 namespace Application.Products
 {
-    public class List
-    {
-		public async Task<Result<List<Product>>> Get(DataContext DataContext, int? Step = null, int? Take = null)
+	public class List
+	{
+		private readonly DataContext _dataContext;
+		public List(DataContext dataContext)
+		{
+			_dataContext = dataContext;
+		}
+		public async Task<Result<List<Product>>> Get(int? step = null, int? take = null)
 		{
 			List<Product> products = null;
 
-			if(Step != null && Take != null)
+			if (step != null && take != null)
 			{
-				products = await DataContext.Products
+				products = await _dataContext.Products
 							.OrderBy(x => x.Name)
-							.Skip(Step.Value * Take.Value)
-							.Take(Take.Value).ToListAsync();
+							.Skip(step.Value * take.Value)
+							.Take(take.Value).ToListAsync();
 			}
 			else
 			{
-				products = await  DataContext.Products.ToListAsync();
+				products = await _dataContext.Products.ToListAsync();
 			}
 
 			return Result<List<Product>>.Success(products);

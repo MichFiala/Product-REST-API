@@ -18,18 +18,18 @@ namespace API.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetProducts()
 		{
-			return HandleResult(await new List().Get(_dataContext));
+			return HandleResult(await new List(_dataContext).Get());
 		}
 		[HttpGet("{page}/{take?}")]
 		[MapToApiVersion("2.0")]
 		public async Task<IActionResult> GetProducts(int page, int? take = 10)
 		{
-			return HandleResult(await new List().Get(_dataContext, page, take));
+			return HandleResult(await new List(_dataContext).Get(page, take));
 		}
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetProduct(int id)
 		{
-			return HandleResult(await new Details().Get(id, _dataContext));
+			return HandleResult(await new Details(_dataContext).Get(id));
 		}
 		[HttpPut("{id}")]
 		public async Task<IActionResult> EditProduct(int id, string description)
@@ -40,7 +40,7 @@ namespace API.Controllers
 				Description = description
 			};
 
-			return HandleResult(await new Edit().Handle(product, _dataContext));
+			return HandleResult(await new Edit(_dataContext).Handle(product));
 		}
 	}
 }
