@@ -32,14 +32,21 @@ namespace API.Controllers
 		{
 			return HandleResult(await new Details(_dataContext).Get(id));
 		}
-		[HttpPut("{id}")]
-		public async Task<IActionResult> EditProduct(int id, string description)
+		[HttpPut("{id}/description")]
+		public async Task<IActionResult> EditProductDescription(int id, string description)
 		{
 			Product product = new Product
 			{
 				Id = id,
 				Description = description
 			};
+
+			return HandleResult(await new Edit(_dataContext).Handle(product));
+		}
+		[HttpPut("{id}")]
+		public async Task<IActionResult> EditProduct(int id, Product product)
+		{
+			product.Id = id;
 
 			return HandleResult(await new Edit(_dataContext).Handle(product));
 		}
