@@ -9,6 +9,10 @@ using Microsoft.Extensions.Logging;
 
 namespace API.Middleware
 {
+	/// <summary>
+	/// Middleware for handling exceptions 
+	/// It wrapps error and append it to response
+	/// </summary>
 	public class ExceptionMiddleware
 	{
 		private readonly RequestDelegate _next;

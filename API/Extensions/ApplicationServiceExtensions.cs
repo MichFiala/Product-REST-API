@@ -16,12 +16,12 @@ namespace API.Extensions
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
 			});
-
+			// Db context based on connection string
 			services.AddDbContext<DataContext>(opt =>
 			{
 				opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
 			});
-
+			// Adding cors
 			services.AddCors(opt =>
 			{
 				opt.AddPolicy("CorsPolicy", policy =>

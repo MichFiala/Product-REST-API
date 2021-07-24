@@ -39,7 +39,7 @@ namespace Test
 
 			var products = okResult.Value as List<Product>;
 
-			Assert.Equal(5, products.Count);
+			Assert.Equal(17, products.Count);
 		}
 		[Fact]
 		public async Task TestListPage()
@@ -53,7 +53,7 @@ namespace Test
 
 			var products = okResult.Value as List<Product>;
 
-			Assert.Equal(2, products.Count);
+			Assert.Equal(10, products.Count);
 		}
 		[Fact]
 		public async Task TestListEntry()
@@ -89,7 +89,7 @@ namespace Test
 
 			string value = "Description from test";
 
-			var result = await controller.EditProduct(1, value);
+			var result = await controller.EditProductDescription(1, value);
 
 			var actionResult = await controller.GetProduct(1);
 
